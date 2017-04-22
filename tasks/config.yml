@@ -7,7 +7,9 @@
     owner: "root"
     group: "{{ hashi_vault_user_info['group'] }}"
     mode: "u=rw,g=r,o=r"
-  notify: "restart vault-server"
+  notify:
+    - "restart vault-server"
+    - "init"
 
 # We give the Vault executable the ability to use the mlock syscall
 # without running the process as root
@@ -16,4 +18,6 @@
     path: "{{ hashi_vault_install_dir }}/vault"
     capability: "cap_ipc_lock+ep"
     state: "present"
-  notify: "restart vault-server"
+  notify:
+    - "restart vault-server"
+    - "init"

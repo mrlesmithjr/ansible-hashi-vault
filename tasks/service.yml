@@ -48,5 +48,7 @@
     name: "vault-server"
     state: "started"
     enabled: true
+  notify:
+    - "init"
   tags:
     - 'hashi_vault_reinit'
