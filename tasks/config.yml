@@ -21,3 +21,4 @@
   notify:
     - "restart vault-server"
     - "init"
+  when: not ansible_check_mode

@@ -20,6 +20,7 @@
   tags:
     - 'hashi_vault_list_policies'
     - 'hashi_vault_read_policies'
+  when: not ansible_check_mode
 
 - name: Policies | Setting Facts For Policy Lists
   set_fact:

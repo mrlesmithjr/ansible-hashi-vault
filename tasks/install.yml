@@ -3,6 +3,7 @@
   stat:
     path: "{{ hashi_vault_install_dir }}/vault"
   register: "_hashi_vault_install"
+  check_mode: no
   tags:
     - 'hashi_vault_show_version'
 
@@ -10,6 +11,7 @@
   shell: "{{ hashi_vault_install_dir }}/vault version | awk '{ print substr($2,2) }'"
   register: "_hashi_vault_version"
   changed_when: false
+  check_mode: no
   tags:
     - 'hashi_vault_show_version'
   when: _hashi_vault_install['stat']['exists']
@@ -18,7 +20,8 @@
   debug: msg="HashiCorp Vault Version Installed{{ ':' }} {{ _hashi_vault_version['stdout'] }}"
   tags:
     - 'hashi_vault_show_version'
-  when: _hashi_vault_install['stat']['exists']
+  when: >
+        _hashi_vault_install['stat']['exists']
 
 - name: install | Downloading HashiCorp Vault (i386)
   get_url:
@@ -41,7 +44,6 @@
         (not _hashi_vault_install['stat']['exists'] or
         (_hashi_vault_install['stat']['exists'] and
         _hashi_vault_version['stdout'] != hashi_vault_version))
-
 
 - name: install | Installing HashiCorp Vault (i386)
   unarchive:

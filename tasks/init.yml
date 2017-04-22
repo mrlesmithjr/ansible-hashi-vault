@@ -3,6 +3,7 @@
 - name: init | Checking If HashiCorp Vault Has Been Initialized
   uri:
     url: "{{ hashi_vault_server_url }}/v1/sys/init"
+  check_mode: no
   register: "_hashi_vault_initialized"
 
 # We initialize vault if it has already not been
