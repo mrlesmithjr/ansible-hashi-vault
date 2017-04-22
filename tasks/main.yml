@@ -65,3 +65,4 @@
 - include: policies.yml
   tags:
     - 'hashi_vault_policies'
+  when: not ansible_check_mode

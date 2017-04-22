@@ -20,6 +20,7 @@
   tags:
     - 'hashi_vault_list_policies'
     - 'hashi_vault_read_policies'
+  when: not ansible_check_mode
 
 - name: Policies | Setting Facts For Policy Lists
   set_fact:
@@ -55,9 +56,9 @@
   tags:
     - 'hashi_vault_list_policies'
 
-- debug: var=_hashi_vault_sever_policies_read['results']
-  tags:
-    - 'hashi_vault_read_policies'
+# - debug: var=_hashi_vault_sever_policies_read['results']
+#   tags:
+#     - 'hashi_vault_read_policies'
 
 # The below does not work yet
 # - name: policies | Showing Rules Of HashiCorp Vault Policies
