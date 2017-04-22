@@ -12,3 +12,4 @@
 # https://github.com/ansible/ansible/issues/15915
 - name: "init"
   include: "{{ 'init' }}.yml"
+  when: not ansible_check_mode
