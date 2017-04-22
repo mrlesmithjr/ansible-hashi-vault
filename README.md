@@ -3,6 +3,11 @@ Role Name
 
 An [Ansible] role to install/configure [Hashi-Vault]
 
+Build Status
+------------
+
+[![Build Status](https://travis-ci.org/mrlesmithjr/ansible-hashi-vault.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-hashi-vault)
+
 Requirements
 ------------
 
