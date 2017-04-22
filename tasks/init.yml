@@ -1,4 +1,11 @@
 ---
+# We need to wait for the listen port to come up
+- name: init | Waiting For HashiCorp Vault Listen Port
+  wait_for:
+    port: "{{ hashi_vault_listen_port }}"
+    delay: 10
+  when: not ansible_check_mode
+
 # We make the API call to check if vault has already been initialized
 - name: init | Checking If HashiCorp Vault Has Been Initialized
   uri:
