@@ -48,7 +48,7 @@
 - name: install | Installing HashiCorp Vault (i386)
   unarchive:
     src: "/opt/vault_{{ hashi_vault_version }}_linux_386.zip"
-    dest: "{{ hashi_vault_install_dir }}"
+    dest: "{{ hashi_vault_install_dir }}/"
     copy: no
   when: >
         ansible_machine == "i386" and
@@ -60,7 +60,7 @@
 - name: install | Installing HashiCorp Vault (x86_64)
   unarchive:
     src: "/opt/vault_{{ hashi_vault_version }}_linux_amd64.zip"
-    dest: "{{ hashi_vault_install_dir }}"
+    dest: "{{ hashi_vault_install_dir }}/"
     copy: no
   when: >
         ansible_machine == "x86_64" and
