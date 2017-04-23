@@ -8,6 +8,8 @@
     group: "root"
     mode: "u=rw,g=r,o=r"
   register: "_vault_service_configured_systemd"
+  notify:
+    - "restart vault-server"
   when: ansible_service_mgr == "systemd"
 
 # We configure the vault service if the host uses upstart
@@ -19,6 +21,8 @@
     group: "root"
     mode: "u=rw,g=r,o=r"
   register: "_vault_service_configured_upstart"
+  notify:
+    - "restart vault-server"
   when: ansible_service_mgr == "upstart"
 
 # We reload systemd for vault-server if service configuration changes

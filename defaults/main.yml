@@ -14,7 +14,7 @@ hashi_vault_init_string:
   secret_shares: '{{ hashi_vault_secret_shares }}'
   secret_threshold: '{{ hashi_vault_secret_threshold }}'
 
-hashi_vault_install_dir: '/usr/local/bin/'
+hashi_vault_install_dir: '/usr/local/bin'
 
 # Defines one or more listeners determine how Vault listens for API requests
 hashi_vault_listen_address: '127.0.0.1'
