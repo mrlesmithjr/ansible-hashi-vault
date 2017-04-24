@@ -16,4 +16,5 @@
   no_log: true
   tags:
     - 'hashi_vault_seal'
+  become: true
   when: not _hashi_vault_sealed['json']['sealed']

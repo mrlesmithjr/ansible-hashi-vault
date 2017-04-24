@@ -17,6 +17,7 @@
     return_content: true
   no_log: true
   register: "_hashi_vault_sever_policies_list"
+  become: true
   tags:
     - 'hashi_vault_list_policies'
     - 'hashi_vault_read_policies'
@@ -39,6 +40,7 @@
   register: "_hashi_vault_sever_policies_read"
   tags:
     - 'hashi_vault_read_policies'
+  become: true
   with_items: "{{ _hashi_vault_policy_list['keys'] }}"
 
 - include: check_seal.yml

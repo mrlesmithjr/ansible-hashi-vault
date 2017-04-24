@@ -11,6 +11,7 @@
       X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
   no_log: true
   register: "_hashi_vault_sever_mounts"
+  become: true
 
 - include: check_seal.yml
 

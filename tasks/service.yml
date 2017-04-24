@@ -10,6 +10,7 @@
   register: "_vault_service_configured_systemd"
   notify:
     - "restart vault-server"
+  become: true
   when: ansible_service_mgr == "systemd"
 
 # We configure the vault service if the host uses upstart
@@ -23,6 +24,7 @@
   register: "_vault_service_configured_upstart"
   notify:
     - "restart vault-server"
+  become: true
   when: ansible_service_mgr == "upstart"
 
 # We reload systemd for vault-server if service configuration changes
@@ -30,6 +32,7 @@
   systemd:
     name: "vault-server"
     daemon_reload: true
+  become: true
   when: >
         (_vault_service_configured_systemd['changed'] or
         _vault_service_configured_upstart['changed']) and
@@ -42,6 +45,7 @@
     state: "stopped"
   tags:
     - 'hashi_vault_reinit'
+  become: true
   when: >
         hashi_vault_backend == "inmem" and
         hashi_vault_reinitialize
@@ -56,3 +60,4 @@
     - "init"
   tags:
     - 'hashi_vault_reinit'
+  become: true

@@ -28,6 +28,7 @@
     url: "{{ hashi_vault_url }}/vault/{{ hashi_vault_version }}/vault_{{ hashi_vault_version }}_linux_386.zip"
     dest: "/opt/vault_{{ hashi_vault_version }}_linux_386.zip"
     validate_certs: no
+  become: true
   when: >
         ansible_machine == "i386" and
         (not _hashi_vault_install['stat']['exists'] or
@@ -39,6 +40,7 @@
     url: "{{ hashi_vault_url }}/vault/{{ hashi_vault_version }}/vault_{{ hashi_vault_version }}_linux_amd64.zip"
     dest: "/opt/vault_{{ hashi_vault_version }}_linux_amd64.zip"
     validate_certs: no
+  become: true
   when: >
         ansible_machine == "x86_64" and
         (not _hashi_vault_install['stat']['exists'] or
@@ -50,6 +52,7 @@
     src: "/opt/vault_{{ hashi_vault_version }}_linux_386.zip"
     dest: "{{ hashi_vault_install_dir }}/"
     copy: no
+  become: true
   when: >
         ansible_machine == "i386" and
         not ansible_check_mode and
@@ -62,6 +65,7 @@
     src: "/opt/vault_{{ hashi_vault_version }}_linux_amd64.zip"
     dest: "{{ hashi_vault_install_dir }}/"
     copy: no
+  become: true
   when: >
         ansible_machine == "x86_64" and
         not ansible_check_mode and
