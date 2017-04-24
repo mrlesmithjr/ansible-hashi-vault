@@ -38,4 +38,5 @@
     owner: "root"
     group: "root"
     mode: "u=rw,g=r,o="
+  become: true
   when: _hashi_vault_init['changed']

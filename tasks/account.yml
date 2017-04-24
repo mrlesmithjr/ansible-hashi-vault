@@ -5,6 +5,7 @@
     name: "{{ hashi_vault_user_info['group'] }}"
     system: true
     state: "present"
+  become: true
 
 # We setup a specific user to run vault as
 - name: account | Creating HashiCorp Vault User
@@ -15,3 +16,4 @@
     group: "{{ hashi_vault_user_info['group'] }}"
     system: true
     state: "present"
+  become: true

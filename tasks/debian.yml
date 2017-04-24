@@ -7,6 +7,7 @@
     state: "present"
   tags:
     - 'hashi_vault_pre_reqs'
+  become: true
   with_items:
     # - 'build-essential'
     - 'jq'

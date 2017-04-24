@@ -10,6 +10,7 @@
   notify:
     - "restart vault-server"
     - "init"
+  become: true
 
 # We give the Vault executable the ability to use the mlock syscall
 # without running the process as root
@@ -21,4 +22,5 @@
   notify:
     - "restart vault-server"
     - "init"
+  become: true
   when: not ansible_check_mode
