@@ -7,7 +7,7 @@
   tags:
     - hashi_vault_show_version
 
-- name: install | Capturing HashiCorp Vault Installed Version (If Installed)
+- name: install | Capturing HashiCorp Vault Installed Version (If Installed) # noqa 306
   shell: "{{ hashi_vault_install_dir }}/vault version | awk '{ print substr($2,2) }'"
   register: _hashi_vault_version
   changed_when: false

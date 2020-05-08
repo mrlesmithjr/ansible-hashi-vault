@@ -31,7 +31,7 @@
 # lose the info and also have it available to use in other tasks
 # **** This might need to have more stringent controls around it other than the
 # permissions set here.
-- name: init | Generating {{ hashi_vault_init_output_file }}
+- name: init | Generating {{ hashi_vault_init_output_file }} # noqa 503
   template:
     src: vault_init.json.j2
     dest: "{{ hashi_vault_init_output_file }}"

@@ -28,7 +28,7 @@
   when: ansible_service_mgr == "upstart"
 
 # We reload systemd for vault-server if service configuration changes
-- name: service | Reloading Systemd
+- name: service | Reloading Systemd # noqa 503
   systemd:
     name: vault-server
     daemon_reload: true
