@@ -1,114 +1,42 @@
-Role Name
-=========
+# ansible-hashi-vault
 
-An [Ansible] role to install/configure [Hashi-Vault]
+Ansible role to install/configure Hashicorp Vault
 
-Build Status
-------------
+## Build Status
+
+### GitHub Actions
+
+![Molecule Test](https://github.com/mrlesmithjr/ansible-hashi-vault/workflows/Molecule%20Test/badge.svg)
+
+### Travis CI
 
 [![Build Status](https://travis-ci.org/mrlesmithjr/ansible-hashi-vault.svg?branch=master)](https://travis-ci.org/mrlesmithjr/ansible-hashi-vault)
 
-Requirements
-------------
+## Requirements
 
-None
+For any required Ansible roles, review:
+[requirements.yml](requirements.yml)
 
-Role Variables
---------------
+## Role Variables
 
-```
----
-# defaults file for ansible-hashi-vault
+[defaults/main.yml](defaults/main.yml)
 
-# Defines the physical backend that Vault uses for storage
-hashi_vault_backend: 'inmem'
-hashi_vault_backend_listen_address: '127.0.0.1:8500'
-hashi_vault_config: '/etc/vault.hcl'
+## Dependencies
 
-hashi_vault_init_check_file: '/etc/.hashi_vault_initialized'
+## Example Playbook
 
-hashi_vault_init_output_file: '/etc/.hashi_vault_init.json'
+[playbook.yml](playbook.yml)
 
-hashi_vault_init_string:
-  secret_shares: '{{ hashi_vault_secret_shares }}'
-  secret_threshold: '{{ hashi_vault_secret_threshold }}'
+## License
 
-hashi_vault_install_dir: '/usr/local/bin/'
+MIT
 
-# Defines one or more listeners determine how Vault listens for API requests
-hashi_vault_listen_address: '127.0.0.1'
-
-# Defines Vault listen port
-hashi_vault_listen_port: '8200'
-
-# Defines if vault secrets should be managed
-hashi_vault_manage_secrets: false
-
-# Defines if vault should be reinitialized
-# this is only useful currently when using inmem as backend
-hashi_vault_reinitialize: false
-
-# Defines the number of secrets to generate
-hashi_vault_secret_shares: 5
-
-# Defines the threshold of the number of secrets required to unseal vault
-hashi_vault_secret_threshold: 3
-
-hashi_vault_secrets:
-  - secret: 'hello'
-    value: 'world'
-
-# Defines if vault health status should be checked
-hashi_vault_show_health_status: false
-
-# Defines if vault key status should be checked
-hashi_vault_show_key_status: false
-
-# Defines if vault leader should be checked
-hashi_vault_show_leader: false
-
-# Defines if vault mounts should be checked
-# lists all the mounted secret backends
-hashi_vault_show_mounts: false
-
-hashi_vault_tls_enabled: false
-hashi_vault_url: 'https://releases.hashicorp.com'
-
-hashi_vault_user_info:
-  user: 'vault'
-  group: 'vault'
-
-hashi_vault_version: '0.7.0'
-```
-
-Dependencies
-------------
-
-None
-
-Example Playbook
-----------------
-
-```
-- hosts: vault_servers
-  become: true
-  vars:
-  roles:
-    - role: ansible-hashi-vault
-  tasks:
-```
-
-License
--------
-
-BSD
-
-Author Information
-------------------
+## Author Information
 
 Larry Smith Jr.
-- @mrlesmithjr
-- http://everythingshouldbevirtual.com
-- mrlesmithjr [at] gmail.com
 
-[Ansible]: <https://www.ansible.com>
+- [@mrlesmithjr](https://twitter.com/mrlesmithjr)
+- [mrlesmithjr@gmail.com](mailto:mrlesmithjr@gmail.com)
+- [http://everythingshouldbevirtual.com](http://everythingshouldbevirtual.com)
+
+> NOTE: Repo has been created/updated using [https://github.com/mrlesmithjr/cookiecutter-ansible-role](https://github.com/mrlesmithjr/cookiecutter-ansible-role) as a template.
