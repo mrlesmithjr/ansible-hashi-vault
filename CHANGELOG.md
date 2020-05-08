@@ -1,3 +1,39 @@
+commit a671d680d325ff7e6ca9691f34ea0a5f81b42664
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 01:38:13 2020 -0400
+
+    Disabled all but Ubuntu tests
+
+commit b9078fb65a114c95399e0fd9ca6fb4074b3f0552
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 01:37:46 2020 -0400
+
+    Updated Galaxy info
+
+commit c303f5243c29c0b7a1f553eaf18497043495acf6
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 01:37:24 2020 -0400
+
+    Updated exposed ports, etc.
+
+commit 9d03ae83caa80bddb5e08318d82f1df701d337d2
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 01:36:58 2020 -0400
+
+    Cleaned up defaults, handlers
+
+commit 1c76b3baf0668c749e613556bd18614f936c70ae
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 01:33:29 2020 -0400
+
+    Cleaned up tasks
+
+commit 0db1b76f47fbb40f4426a99dfb410e5dfd7a9552
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 01:00:41 2020 -0400
+
+    Updated files for new cookiecutter format
+
 commit 50ad718959bc6e478a25bfb9d6aef2547cfd9df5
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri May 8 00:57:59 2020 -0400
