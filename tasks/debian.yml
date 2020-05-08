@@ -1,19 +1,21 @@
 ---
 # We install JQ in case we want to parse any output into JSON when the
 # existing output is not already in JSON
+- name: debian | Update APT Cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+  become: true
+
 - name: debian | Installing Pre-Reqs
   apt:
-    name: "{{ item }}"
-    state: "present"
+    name:
+      - jq
+      - libcap2-bin
+      - unzip
+    state: present
   tags:
-    - 'hashi_vault_pre_reqs'
+    - hashi_vault_pre_reqs
   become: true
-  with_items:
-    # - 'build-essential'
-    - 'jq'
-    - 'libcap2-bin'
-    # - 'libffi-dev'
-    # - 'libssl-dev'
-    # - 'python-dev'
-    # - 'python-pip'
-    # - 'python-setuptools'
+  register: result
+  until: result is successful
