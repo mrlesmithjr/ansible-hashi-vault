@@ -59,4 +59,4 @@ hashi_vault_user_info:
   user: vault
   group: vault
 
-hashi_vault_version: 0.7.0
+hashi_vault_version: 1.4.1
