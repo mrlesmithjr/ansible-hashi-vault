@@ -7,7 +7,7 @@
 # We must iterate through all keys in order to reach the hashi_vault_secret_threshold
 - name: unseal | Unsealing HashiCorp Vault
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/unseal"
+    url: "{{ hashi_vault_server_url+'/v1/sys/unseal' }}"
     body:
       key: "{{ item }}"
     body_format: json

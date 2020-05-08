@@ -6,7 +6,7 @@
 
 - name: key_status | Checking HashiCorp Vault Key Status
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/key-status"
+    url: "{{ hashi_vault_server_url+'/v1/sys/key-status' }}"
     headers:
       X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
   no_log: true

@@ -11,7 +11,7 @@
 # 503 if sealed
 - name: health | Checking HashiCorp Vault Health
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/health"
+    url: "{{ hashi_vault_server_url+'/v1/sys/health' }}"
     status_code: 200,429,501,503
   register: _hashi_vault_sever_health
 

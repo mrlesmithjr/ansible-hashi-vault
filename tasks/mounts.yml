@@ -6,7 +6,7 @@
 
 - name: mounts | Checking HashiCorp Vault Health
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/mounts"
+    url: "{{ hashi_vault_server_url+'/v1/sys/mounts' }}"
     headers:
       X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
   no_log: true

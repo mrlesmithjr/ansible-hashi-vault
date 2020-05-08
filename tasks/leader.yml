@@ -6,7 +6,7 @@
 
 - name: leader | Checking HashiCorp Vault Leader
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/leader"
+    url: "{{ hashi_vault_server_url+'/v1/sys/leader' }}"
   register: _hashi_vault_sever_leader
 
 - include_tasks: check_seal.yml

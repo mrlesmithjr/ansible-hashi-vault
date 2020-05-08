@@ -1,7 +1,7 @@
 ---
 - name: install | Checking For Previous Install Of HashiCorp Vault
   stat:
-    path: "{{ hashi_vault_install_dir }}/vault"
+    path: "{{ hashi_vault_install_dir+'/vault' }}"
   register: _hashi_vault_install
   check_mode: no
   tags:
@@ -17,16 +17,17 @@
   when: _hashi_vault_install['stat']['exists']
 
 - name: install | Showing HashiCorp Vault Installed Version (If Installed)
-  debug: msg="HashiCorp Vault Version Installed{{ ':' }} {{ _hashi_vault_version['stdout'] }}"
+  debug:
+    msg: "{{ 'HashiCorp Vault Version Installed: '+_hashi_vault_version['stdout'] }}"
   tags:
     - hashi_vault_show_version
-  when: >
-    _hashi_vault_install['stat']['exists']
+  when:
+    - _hashi_vault_install['stat']['exists']
 
 - name: install | Downloading HashiCorp Vault (i386)
   get_url:
-    url: "{{ hashi_vault_url }}/vault/{{ hashi_vault_version }}/vault_{{ hashi_vault_version }}_linux_386.zip"
-    dest: "/opt/vault_{{ hashi_vault_version }}_linux_386.zip"
+    url: "{{ hashi_vault_url+'/vault/'+hashi_vault_version|string+'/vault_'+hashi_vault_version|string+'_linux_386.zip' }}"
+    dest: "{{ '/opt/vault_'+hashi_vault_version|string+'_linux_386.zip' }}"
     validate_certs: no
   become: true
   when: >
@@ -37,8 +38,8 @@
 
 - name: install | Downloading HashiCorp Vault (x86_64)
   get_url:
-    url: "{{ hashi_vault_url }}/vault/{{ hashi_vault_version }}/vault_{{ hashi_vault_version }}_linux_amd64.zip"
-    dest: "/opt/vault_{{ hashi_vault_version }}_linux_amd64.zip"
+    url: "{{ hashi_vault_url+'/vault/'+hashi_vault_version|string+'/vault_'+hashi_vault_version|string+'_linux_amd64.zip' }}"
+    dest: "{{ '/opt/vault_'+hashi_vault_version|string+'_linux_amd64.zip' }}"
     validate_certs: no
   become: true
   when: >
@@ -49,8 +50,8 @@
 
 - name: install | Installing HashiCorp Vault (i386)
   unarchive:
-    src: "/opt/vault_{{ hashi_vault_version }}_linux_386.zip"
-    dest: "{{ hashi_vault_install_dir }}/"
+    src: "{{ '/opt/vault_'+hashi_vault_version|string+'_linux_386.zip' }}"
+    dest: "{{ hashi_vault_install_dir+'/' }}"
     copy: no
   become: true
   when: >
@@ -62,8 +63,8 @@
 
 - name: install | Installing HashiCorp Vault (x86_64)
   unarchive:
-    src: "/opt/vault_{{ hashi_vault_version }}_linux_amd64.zip"
-    dest: "{{ hashi_vault_install_dir }}/"
+    src: "{{ '/opt/vault_'+hashi_vault_version|string+'_linux_amd64.zip' }}"
+    dest: "{{ hashi_vault_install_dir+'/' }}"
     copy: no
   become: true
   when: >

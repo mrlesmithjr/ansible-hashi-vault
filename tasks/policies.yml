@@ -11,7 +11,7 @@
 
 - name: policies | Capturing List Of Configured HashiCorp Vault Policies
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/policy"
+    url: "{{ hashi_vault_server_url+'/v1/sys/policy' }}"
     headers:
       X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
     return_content: true
@@ -32,7 +32,7 @@
 
 - name: policies | Reading Rules For HashiCorp Vault Policies
   uri:
-    url: "{{ hashi_vault_server_url }}/v1/sys/policy/{{ item }}"
+    url: "{{ hashi_vault_server_url+'/v1/sys/policy/'+item }}"
     headers:
       X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
     return_content: true
