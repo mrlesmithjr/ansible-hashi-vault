@@ -3,7 +3,7 @@
 - name: unseal_keys | Read HashiCorp Vault Secrets From {{ hashi_vault_init_output_file }}
   slurp:
     src: "{{ hashi_vault_init_output_file }}"
-  register: "_hashi_vault_secrets_vars"
+  register: _hashi_vault_secrets_vars
   become: true
 
 # We set the fact to hold an array of our unseal_keys and hide them from logging

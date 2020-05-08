@@ -1,17 +1,17 @@
 ---
-- include: check_seal.yml
+- include_tasks: check_seal.yml
 
-- include: unseal.yml
+- include_tasks: unseal.yml
   when: _hashi_vault_sealed['json']['sealed']
 
 - name: leader | Checking HashiCorp Vault Leader
   uri:
     url: "{{ hashi_vault_server_url }}/v1/sys/leader"
-  register: "_hashi_vault_sever_leader"
+  register: _hashi_vault_sever_leader
 
-- include: check_seal.yml
+- include_tasks: check_seal.yml
 
-- include: seal.yml
+- include_tasks: seal.yml
   when: not _hashi_vault_sealed['json']['sealed']
 
 - name: leader | Showing HashiCorp Vault Leader

@@ -1,7 +1,7 @@
 ---
-- include: check_seal.yml
+- include_tasks: check_seal.yml
 
-- include: unseal.yml
+- include_tasks: unseal.yml
   when: _hashi_vault_sealed['json']['sealed']
 
 - name: key_status | Checking HashiCorp Vault Key Status
@@ -10,12 +10,12 @@
     headers:
       X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
   no_log: true
-  register: "_hashi_vault_sever_key_status"
+  register: _hashi_vault_sever_key_status
   become: true
 
-- include: check_seal.yml
+- include_tasks: check_seal.yml
 
-- include: seal.yml
+- include_tasks: seal.yml
   when: not _hashi_vault_sealed['json']['sealed']
 
 - name: key_status | Showing HashiCorp Vault Key Status

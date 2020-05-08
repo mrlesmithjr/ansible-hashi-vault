@@ -4,16 +4,16 @@
   group:
     name: "{{ hashi_vault_user_info['group'] }}"
     system: true
-    state: "present"
+    state: present
   become: true
 
 # We setup a specific user to run vault as
 - name: account | Creating HashiCorp Vault User
   user:
     name: "{{ hashi_vault_user_info['user'] }}"
-    shell: "/bin/false"
+    shell: /bin/false
     createhome: false
     group: "{{ hashi_vault_user_info['group'] }}"
     system: true
-    state: "present"
+    state: present
   become: true

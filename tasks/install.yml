@@ -2,26 +2,26 @@
 - name: install | Checking For Previous Install Of HashiCorp Vault
   stat:
     path: "{{ hashi_vault_install_dir }}/vault"
-  register: "_hashi_vault_install"
+  register: _hashi_vault_install
   check_mode: no
   tags:
-    - 'hashi_vault_show_version'
+    - hashi_vault_show_version
 
 - name: install | Capturing HashiCorp Vault Installed Version (If Installed)
   shell: "{{ hashi_vault_install_dir }}/vault version | awk '{ print substr($2,2) }'"
-  register: "_hashi_vault_version"
+  register: _hashi_vault_version
   changed_when: false
   check_mode: no
   tags:
-    - 'hashi_vault_show_version'
+    - hashi_vault_show_version
   when: _hashi_vault_install['stat']['exists']
 
 - name: install | Showing HashiCorp Vault Installed Version (If Installed)
   debug: msg="HashiCorp Vault Version Installed{{ ':' }} {{ _hashi_vault_version['stdout'] }}"
   tags:
-    - 'hashi_vault_show_version'
+    - hashi_vault_show_version
   when: >
-        _hashi_vault_install['stat']['exists']
+    _hashi_vault_install['stat']['exists']
 
 - name: install | Downloading HashiCorp Vault (i386)
   get_url:
@@ -30,10 +30,10 @@
     validate_certs: no
   become: true
   when: >
-        ansible_machine == "i386" and
-        (not _hashi_vault_install['stat']['exists'] or
-        (_hashi_vault_install['stat']['exists'] and
-        _hashi_vault_version['stdout'] != hashi_vault_version))
+    ansible_machine == "i386" and
+    (not _hashi_vault_install['stat']['exists'] or
+    (_hashi_vault_install['stat']['exists'] and
+    _hashi_vault_version['stdout'] != hashi_vault_version))
 
 - name: install | Downloading HashiCorp Vault (x86_64)
   get_url:
@@ -42,10 +42,10 @@
     validate_certs: no
   become: true
   when: >
-        ansible_machine == "x86_64" and
-        (not _hashi_vault_install['stat']['exists'] or
-        (_hashi_vault_install['stat']['exists'] and
-        _hashi_vault_version['stdout'] != hashi_vault_version))
+    ansible_machine == "x86_64" and
+    (not _hashi_vault_install['stat']['exists'] or
+    (_hashi_vault_install['stat']['exists'] and
+    _hashi_vault_version['stdout'] != hashi_vault_version))
 
 - name: install | Installing HashiCorp Vault (i386)
   unarchive:
@@ -54,11 +54,11 @@
     copy: no
   become: true
   when: >
-        ansible_machine == "i386" and
-        not ansible_check_mode and
-        (not _hashi_vault_install['stat']['exists'] or
-        (_hashi_vault_install['stat']['exists'] and
-        _hashi_vault_version['stdout'] != hashi_vault_version))
+    ansible_machine == "i386" and
+    not ansible_check_mode and
+    (not _hashi_vault_install['stat']['exists'] or
+    (_hashi_vault_install['stat']['exists'] and
+    _hashi_vault_version['stdout'] != hashi_vault_version))
 
 - name: install | Installing HashiCorp Vault (x86_64)
   unarchive:
@@ -67,8 +67,8 @@
     copy: no
   become: true
   when: >
-        ansible_machine == "x86_64" and
-        not ansible_check_mode and
-        (not _hashi_vault_install['stat']['exists'] or
-        (_hashi_vault_install['stat']['exists'] and
-        _hashi_vault_version['stdout'] != hashi_vault_version))
+    ansible_machine == "x86_64" and
+    not ansible_check_mode and
+    (not _hashi_vault_install['stat']['exists'] or
+    (_hashi_vault_install['stat']['exists'] and
+    _hashi_vault_version['stdout'] != hashi_vault_version))
