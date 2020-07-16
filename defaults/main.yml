@@ -6,7 +6,7 @@ hashi_vault_config: "{{ hashi_vault_config_dir+'/vault-config.json' }}"
 
 # Define Vault configuration which is converted to JSON using template
 # https://www.vaultproject.io/docs/configuration
-hashi_vault_configuration1:
+hashi_vault_configuration:
   api_addr: http://127.0.0.1:8200
   # api_addr: "{{ 'http://'+ansible_enp0s8.ipv4.address+':8200' }}"
   cluster_addr: http://127.0.0.1:8201
