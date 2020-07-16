@@ -2,25 +2,24 @@
 # We generate the vault config
 - name: config | Configuring HashiCorp Vault
   template:
-    src: vault.hcl.j2
+    src: etc/vault.d/vault-config.json.j2
     dest: "{{ hashi_vault_config }}"
     owner: root
-    group: "{{ hashi_vault_user_info['group'] }}"
+    group: "{{ hashi_vault_user_info.group }}"
     mode: u=rw,g=r,o=r
   notify:
     - restart vault-server
-    - init
+    - init vault-server
   become: true
 
 # We give the Vault executable the ability to use the mlock syscall
 # without running the process as root
-- name: config | Granting {{ hashi_vault_user_info['user'] }} mlock syscall
+- name: config | Granting {{ hashi_vault_user_info.user }} mlock syscall
   capabilities:
     path: "{{ hashi_vault_install_dir+'/vault' }}"
     capability: cap_ipc_lock+ep
     state: present
   notify:
     - restart vault-server
-    - init
+    - init vault-server
   become: true
-  when: not ansible_check_mode

@@ -1,59 +1,39 @@
 ---
 - include_tasks: check_seal.yml
-  tags:
-    - hashi_vault_list_policies
-    - hashi_vault_read_policies
 
 - include_tasks: unseal.yml
-  tags:
-    - hashi_vault_list_policies
-    - hashi_vault_read_policies
 
 - name: policies | Capturing List Of Configured HashiCorp Vault Policies
   uri:
     url: "{{ hashi_vault_server_url+'/v1/sys/policy' }}"
     headers:
-      X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
+      X-Vault-Token: "{{ _hashi_vault_unseal_keys.root_token }}"
     return_content: true
   no_log: true
   register: _hashi_vault_sever_policies_list
-  become: true
-  tags:
-    - hashi_vault_list_policies
-    - hashi_vault_read_policies
-  when: not ansible_check_mode
+  when: inventory_hostname == hashi_vault_master
 
 - name: Policies | Setting Facts For Policy Lists
   set_fact:
-    _hashi_vault_policy_list: "{{ _hashi_vault_sever_policies_list['content']|from_json }}"
-  tags:
-    - hashi_vault_list_policies
-    - hashi_vault_read_policies
+    _hashi_vault_policy_list: "{{ _hashi_vault_sever_policies_list.content|from_json }}"
+  when: inventory_hostname == hashi_vault_master
 
 - name: policies | Reading Rules For HashiCorp Vault Policies
   uri:
     url: "{{ hashi_vault_server_url+'/v1/sys/policy/'+item }}"
     headers:
-      X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
+      X-Vault-Token: "{{ _hashi_vault_unseal_keys.root_token }}"
     return_content: true
   no_log: true
   register: _hashi_vault_sever_policies_read
-  tags:
-    - hashi_vault_read_policies
-  become: true
   loop: "{{ _hashi_vault_policy_list['keys'] }}"
+  when: inventory_hostname == hashi_vault_master
 
 - include_tasks: check_seal.yml
-  tags:
-    - hashi_vault_list_policies
-    - hashi_vault_read_policies
 
 - include_tasks: seal.yml
-  tags:
-    - hashi_vault_list_policies
-    - hashi_vault_read_policies
 
 - name: policies | Showing List Of HashiCorp Vault Policies
-  debug: var=_hashi_vault_policy_list['keys']
-  tags:
-    - hashi_vault_list_policies
+  debug:
+    var: _hashi_vault_policy_list['keys']
+  when: inventory_hostname == hashi_vault_master

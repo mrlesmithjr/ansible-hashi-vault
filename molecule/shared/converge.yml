@@ -1,6 +1,8 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    hashi_vault_master: "{{ inventory_hostname }}"
   tasks:
     - name: Include ansible-hashi-vault
       include_role:

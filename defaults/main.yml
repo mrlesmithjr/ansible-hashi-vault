@@ -1,43 +1,65 @@
 ---
 # defaults file for ansible-hashi-vault
 
-# Defines the physical backend that Vault uses for storage
-hashi_vault_backend: inmem
-hashi_vault_backend_listen_address: 127.0.0.1:8500
-hashi_vault_config: /etc/vault.hcl
+hashi_vault_config_dir: /etc/vault.d
+hashi_vault_config: "{{ hashi_vault_config_dir+'/vault-config.json' }}"
 
-hashi_vault_init_check_file: /etc/.hashi_vault_initialized
+# Define Vault configuration which is converted to JSON using template
+# https://www.vaultproject.io/docs/configuration
+hashi_vault_configuration1:
+  api_addr: http://127.0.0.1:8200
+  # api_addr: "{{ 'http://'+ansible_enp0s8.ipv4.address+':8200' }}"
+  cluster_addr: http://127.0.0.1:8201
+  # cluster_addr: "{{ 'http://'+ansible_enp0s8.ipv4.address+':8201' }}"
+  listener:
+    # First address will always be used to define url
+    - tcp:
+        address: 127.0.0.1:8200
+        cluster_address: 127.0.0.1:8201
+        tls_disable: true
+    # - tcp:
+    #     address: "{{ ansible_enp0s8.ipv4.address+':8200' }}"
+    #     cluster_address: "{{ ansible_enp0s8.ipv4.address+':8201' }}"
+    #     tls_disable: true
+  storage:
+    # consul:
+    #   address: 127.0.0.1:8500
+    #   path: vault/
+    #   scheme: http
+    inmem: {}
+    # file:
+    #   path: /var/lib/vault
+  ui: true
 
-hashi_vault_init_output_file: /etc/.hashi_vault_init.json
+# Defines Ansible group
+hashi_vault_group: vault_servers
+
+# Stores keys after initializing. Not very secure!!!
+hashi_vault_init_output_file: "{{ hashi_vault_config_dir+'/.hashi_vault_init.json' }}"
 
 hashi_vault_init_string:
-  secret_shares: "{{ hashi_vault_secret_shares }}"
-  secret_threshold: "{{ hashi_vault_secret_threshold }}"
+  secret_shares: 5
+  secret_threshold: 3
 
 hashi_vault_install_dir: /usr/local/bin
 
-# Defines one or more listeners determine how Vault listens for API requests
-hashi_vault_listen_address: 127.0.0.1
-
-# Defines Vault listen port
-hashi_vault_listen_port: 8200
-
 # Defines if vault secrets should be managed
 hashi_vault_manage_secrets: false
+
+# Defines Vault master when more than one server
+hashi_vault_master: "{{ groups[hashi_vault_group][0] }}"
 
 # Defines if vault should be reinitialized
 # this is only useful currently when using inmem as backend
 hashi_vault_reinitialize: false
 
-# Defines the number of secrets to generate
-hashi_vault_secret_shares: 5
-
-# Defines the threshold of the number of secrets required to unseal vault
-hashi_vault_secret_threshold: 3
+# Defines whether Vault should remain unsealed
+hashi_vault_remain_unsealed: false
 
 hashi_vault_secrets:
-  - secret: hello
-    value: world
+  []
+  # - secret: hello
+  #   value: world
 
 # Defines if vault health status should be checked
 hashi_vault_show_health_status: false
@@ -52,8 +74,7 @@ hashi_vault_show_leader: false
 # lists all the mounted secret backends
 hashi_vault_show_mounts: false
 
-hashi_vault_tls_enabled: false
-hashi_vault_url: https://releases.hashicorp.com
+hashi_vault_show_policies: false
 
 hashi_vault_user_info:
   user: vault

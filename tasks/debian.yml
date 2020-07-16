@@ -1,12 +1,11 @@
 ---
-# We install JQ in case we want to parse any output into JSON when the
-# existing output is not already in JSON
 - name: debian | Update APT Cache
   apt:
     update_cache: true
-    cache_valid_time: 3600
   become: true
 
+# We install JQ in case we want to parse any output into JSON when the
+# existing output is not already in JSON
 - name: debian | Installing Pre-Reqs
   apt:
     name:
@@ -14,8 +13,6 @@
       - libcap2-bin
       - unzip
     state: present
-  tags:
-    - hashi_vault_pre_reqs
   become: true
   register: result
   until: result is successful
