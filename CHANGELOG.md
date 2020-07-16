@@ -1,3 +1,27 @@
+commit 7515e60b4c05902d950132a5e7d2529360a33013
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 15:17:33 2020 -0400
+
+    Complete role refactoring
+    
+    After years of neglect for this role, we have began refactoring to bring
+    the role more into a more current state. This is in preparation of much
+    more functionality to come in the future.
+
+commit 46789522cfb6d6c2ad94ac5bb82976294a6f80bc
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 09:56:36 2020 -0400
+
+    Updated to 1.4.1 version
+
+commit a7923c3a4eb999de21b7c90e93ced8a2d9616220
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Fri May 8 08:52:12 2020 -0400
+
+    Cleaned up syntax, etc.
+    
+    Cleaned up tasks a bit more.
+
 commit 23b4a170e666a39cef343fbdffa183e0be06201c
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Fri May 8 08:21:11 2020 -0400

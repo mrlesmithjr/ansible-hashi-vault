@@ -1,7 +1,5 @@
 ---
 - include_tasks: unseal_keys.yml
-  tags:
-    - hashi_vault_unseal
 
 # We unseal vault in order to read secrets
 # We must iterate through all keys in order to reach the hashi_vault_secret_threshold
@@ -14,8 +12,6 @@
     method: PUT
   register: _hashi_vault_unsealed
   no_log: true
-  become: true
-  loop: "{{ _hashi_vault_unseal_keys['unseal_keys'] }}"
-  when: _hashi_vault_sealed['json']['sealed']
-  tags:
-    - hashi_vault_unseal
+  loop: "{{ _hashi_vault_unseal_keys['keys'] }}"
+  when:
+    - _hashi_vault_sealed.json.sealed|bool

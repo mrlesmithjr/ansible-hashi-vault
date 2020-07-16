@@ -10,5 +10,5 @@
 # The below format is the only way that works for firing this handler as an
 # include
 # https://github.com/ansible/ansible/issues/15915
-- name: init
+- name: init vault-server
   include_tasks: "{{ 'init' }}.yml"

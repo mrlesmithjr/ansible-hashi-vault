@@ -2,7 +2,7 @@
 - include_tasks: check_seal.yml
 
 - include_tasks: unseal.yml
-  when: _hashi_vault_sealed['json']['sealed']
+  when: _hashi_vault_sealed.json.sealed|bool
 
 # The default status codes are:
 # 200 if initialized, unsealed, and active
@@ -18,7 +18,8 @@
 - include_tasks: check_seal.yml
 
 - include_tasks: seal.yml
-  when: not _hashi_vault_sealed['json']['sealed']
+  when: not _hashi_vault_sealed.json.sealed|bool
 
 - name: health | Showing HashiCorp Vault Health
-  debug: var=_hashi_vault_sever_health['json']
+  debug:
+    var: _hashi_vault_sever_health.json

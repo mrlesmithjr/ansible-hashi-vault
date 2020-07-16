@@ -2,21 +2,21 @@
 - include_tasks: check_seal.yml
 
 - include_tasks: unseal.yml
-  when: _hashi_vault_sealed['json']['sealed']
+  when: _hashi_vault_sealed.json.sealed|bool
 
-- name: mounts | Checking HashiCorp Vault Health
+- name: mounts | Checking HashiCorp Vault Mounts
   uri:
     url: "{{ hashi_vault_server_url+'/v1/sys/mounts' }}"
     headers:
-      X-Vault-Token: "{{ _hashi_vault_unseal_keys['root_token'] }}"
+      X-Vault-Token: "{{ _hashi_vault_unseal_keys.root_token }}"
   no_log: true
   register: _hashi_vault_sever_mounts
-  become: true
 
 - include_tasks: check_seal.yml
 
 - include_tasks: seal.yml
-  when: not _hashi_vault_sealed['json']['sealed']
+  when: not _hashi_vault_sealed.json.sealed|bool
 
-- name: mounts | Showing HashiCorp Vault Health
-  debug: var=_hashi_vault_sever_mounts['json']
+- name: mounts | Showing HashiCorp Vault Mounts
+  debug:
+    var: _hashi_vault_sever_mounts.json

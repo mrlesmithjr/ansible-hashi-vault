@@ -1,12 +1,12 @@
 ---
-# We set the vault server url to http if not using TLS
+# Non TLS
 - name: set_facts | Setting Facts
   set_fact:
-    hashi_vault_server_url: "{{ 'http://'+hashi_vault_listen_address+':'+hashi_vault_listen_port|string }}"
-  when: not hashi_vault_tls_enabled
+    hashi_vault_server_url: "{{ 'http://'+hashi_vault_configuration.listener.0.tcp.address }}"
+  when: hashi_vault_configuration.listener.0.tcp.tls_disable|bool
 
-# We set the vault server url to https if using TLS
+# TLS
 - name: set_facts | Setting Facts
   set_fact:
-    hashi_vault_server_url: "{{ 'https://'+hashi_vault_listen_address }}"
-  when: hashi_vault_tls_enabled
+    hashi_vault_server_url: "{{ 'https://'+hashi_vault_configuration.listener.0.tcp.address }}"
+  when: not hashi_vault_configuration.listener.0.tcp.tls_disable|bool
