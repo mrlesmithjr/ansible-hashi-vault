@@ -1,3 +1,49 @@
+commit 7b052a312ea90a6ad6f933e0e47c97f3e7b1406c
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:22:54 2020 -0400
+
+    Removed Molecule linting flags for Ubuntu1804
+
+commit 62fb5dde03b313c366171ff30b55ede0259abc93
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:20:35 2020 -0400
+
+    Removed cache_valid_time for Apt
+    
+    Packages are not getting installed because apt cache is not up to date
+
+commit 07f0ea864ee387f311b570670a035ade324f37f8
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 23:04:39 2020 -0400
+
+    Added EPEL-release and updated support platforms
+
+commit 8f3989432bc4d06b8d3b331beeba4a8551a46f76
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:55:03 2020 -0400
+
+    Added RedHat pre-reqs
+
+commit eeab874ddceae35ee288f19a87aa9a828168e149
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:51:59 2020 -0400
+
+    Fixing idempotence issue with Apt cache
+
+commit f156401627befbaa11da2d04d9c41329e8b4a446
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 22:40:41 2020 -0400
+
+    Updated to latest CI tests
+
+commit 0803b7075927cb3f9bb064e8e28f097f4bf1a7cb
+Author: Larry Smith Jr <mrlesmithjr@gmail.com>
+Date:   Thu Jul 16 15:28:47 2020 -0400
+
+    Fixed hashi_vault_configuration var name
+    
+    The var was incorrectly named as hashi_vault_configuration1
+
 commit 7515e60b4c05902d950132a5e7d2529360a33013
 Author: Larry Smith Jr <mrlesmithjr@gmail.com>
 Date:   Thu Jul 16 15:17:33 2020 -0400
