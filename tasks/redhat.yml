@@ -1,0 +1,10 @@
+---
+- name: redhat | Installing Pre-Reqs
+  package:
+    name:
+      - jq
+      - unzip
+    state: present
+  become: true
+  register: result
+  until: result is successful
