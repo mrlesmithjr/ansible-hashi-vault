@@ -5,6 +5,15 @@
     state: directory
   become: true
 
+- name: install | Creating {{ hashi_vault_configuration.storage.file.path }}
+  file:
+    path: "{{ hashi_vault_configuration.storage.file.path }}"
+    state: directory
+    owner: "{{ hashi_vault_user_info.user }}"
+    group: "{{ hashi_vault_user_info.group }}"
+  become: true
+  when: hashi_vault_configuration.storage.file.path is defined
+
 - name: install | Checking For Previous Install Of HashiCorp Vault
   stat:
     path: "{{ hashi_vault_install_dir+'/vault' }}"
